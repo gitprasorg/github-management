@@ -2,10 +2,12 @@
 terraform {
   backend "remote" {
     hostname     = "app.terraform.io"
-    organization = "gitprasorg"
+    organization = var.GITHUB_ORGANIZATION
+    default      = "gitprasorg"
 
     workspaces {
-      name = "github-management"
+      name    = var.VCS_WORKSPACES
+      default = "github-vcs-001"
     }
   }
 }

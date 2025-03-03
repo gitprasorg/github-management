@@ -1,0 +1,49 @@
+name: Terraform
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    env:
+      TERRAFORM_CLOUD_TOKEN: ${{ secrets.TERRAFORM_CLOUD_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform CLI
+        uses: hashicorp/setup-terraform@v2
+
+      # - name: Verify Terraform and Environment
+      #   run: |
+      #     terraform version
+      #     echo "TERRAFORM_CLOUD_TOKEN length: ${#TERRAFORM_CLOUD_TOKEN}"
+  
+      - name: Set Terraform Cloud Credentials
+        run: |
+          mkdir -p ~/.terraform.d
+          cat <<EOF > ~/.terraform.d/credentials.tfrc.json
+          {
+            "credentials": {
+              "app.terraform.io": {
+                "token": "${{ secrets.TERRAFORM_CLOUD_TOKEN }}"
+              }
+            }
+          }
+          EOF
+
+      - name: Terraform Init and validate
+        run: |
+          terraform init
+          terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan -input=false
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -input=false
