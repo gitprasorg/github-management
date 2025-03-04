@@ -8,7 +8,7 @@
 #   }
 # }
 provider "github" {
-  owner = var.github_organization
+  owner = var.GITHUB_ORGANIZATION
   app_auth {} # When using `GITHUB_APP_XXX` environment variables
 }
 
