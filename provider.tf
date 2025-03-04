@@ -2,9 +2,9 @@
 provider "github" {
   owner = var.GITHUB_ORGANIZATION
   app_auth {
-    id              = TF_VAR.app_id              # or `GITHUB_APP_ID`
-    installation_id = TF_VAR.app_installation_id # or `GITHUB_APP_INSTALLATION_ID`
-    pem_file        = TF_VAR.app_pem_file        # or `GITHUB_APP_PEM_FILE`
+    id              = var.app_id              # or `GITHUB_APP_ID`
+    installation_id = var.app_installation_id # or `GITHUB_APP_INSTALLATION_ID`
+    pem_file        = var.app_pem_file        # or `GITHUB_APP_PEM_FILE`
   }
 }
 
