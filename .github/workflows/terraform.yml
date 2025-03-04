@@ -11,7 +11,11 @@ on:
       - synchronize
       - reopened
       - closed
+
   workflow_dispatch:
+    inputs:
+      run_id:
+        required: true
     
 jobs:
   terraform:
