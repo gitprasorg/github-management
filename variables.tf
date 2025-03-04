@@ -13,3 +13,18 @@ variable "VCS_WORKSPACES" {
   description = "Workflow for current VCS"
 
 }
+
+variable "app_id" {
+  type        = string
+  description = "The GitHub App ID."
+}
+
+variable "app_installation_id" {
+  type        = string
+  description = "The GitHub App installation ID."
+}
+
+variable "app_pem_file" {
+  type        = string
+  description = "The path to the PEM file for the GitHub App."
+}

@@ -1,16 +1,13 @@
 # # Configure the GitHub Provider
-# provider "github" {
-#   owner = var.github_organization
-#   app_auth {
-#     id              = var.app_id              # or `GITHUB_APP_ID`
-#     installation_id = var.app_installation_id # or `GITHUB_APP_INSTALLATION_ID`
-#     pem_file        = var.app_pem_file        # or `GITHUB_APP_PEM_FILE`
-#   }
-# }
 provider "github" {
   owner = var.GITHUB_ORGANIZATION
-  app_auth {} # When using `GITHUB_APP_XXX` environment variables
+  app_auth {
+    id              = TF_VAR.app_id              # or `GITHUB_APP_ID`
+    installation_id = TF_VAR.app_installation_id # or `GITHUB_APP_INSTALLATION_ID`
+    pem_file        = TF_VAR.app_pem_file        # or `GITHUB_APP_PEM_FILE`
+  }
 }
+
 
 #token: When not provided or made available via the GITHUB_TOKEN environment variable, the provider can only access resources available anonymously.
 # https://registry.terraform.io/providers/integrations/github/latest/docs
